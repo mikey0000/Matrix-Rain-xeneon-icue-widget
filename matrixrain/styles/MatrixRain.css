@@ -1,0 +1,81 @@
+:root {
+  --text-color: #00ff41;
+  --accent-color: #ffffff;
+  --bg-color: #000000;
+  --bg-opacity: 1;
+  --bg-blur: 0px;
+
+  --layout-unit: 1vmin;
+  --device-vertical-s-unit: 4.16px;
+  --preview-vertical-s-unit: calc(100vw * 416 / 69600);
+}
+
+html { overflow: hidden; }
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  background: transparent;
+}
+
+.widget-root {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.widget-background {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+  opacity: var(--bg-opacity);
+  transition: opacity 0.2s ease;
+}
+
+.main-glass {
+  position: absolute;
+  inset: 0;
+  background-color: var(--bg-color);
+  z-index: 0;
+}
+
+#media-background {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  filter: blur(var(--bg-blur));
+  z-index: 1;
+}
+
+#rain-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background: transparent;
+  display: block;
+}
+
+/* Accessibility: respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  #rain-canvas { display: none; }
+}
+
+/* Vertical device/preview baseline overrides */
+@media (min-width: 680px) and (max-width: 712px) and (min-height: 416px) {
+  :root { --layout-unit: var(--device-vertical-s-unit); }
+}
+
+@media (min-width: 180px) and (max-width: 360px) and (max-aspect-ratio: 0.9) {
+  :root { --layout-unit: var(--preview-vertical-s-unit); }
+}
